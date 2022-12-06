@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">steam</string>
+    <string name="forget_password_underline"><u>Mot de passe oublié</u></string>
+    <string name="welcome_title">Bienvenue !</string>
+    <string name="welcome_description">Veuillez vous connecter ou créer un nouveau compte pour utiliser l’application.</string>
+    <string name="email">E-mail</string>
+    <string name="password">Mot de passe</string>
+    <string name="sign_in">Se connecter</string>
+    <string name="sign_up">Créer un nouveau compte</string>
+</resources>
