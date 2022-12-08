@@ -18,4 +18,11 @@
     <string name="send_email">Renvoyer mon mot de passe</string>
     <string name="return_to_sign_in">Retourner sur l\'écran de connexion</string>
     <string name="home">Accueil</string>
+    <string name="search_game">Rechercher un jeu…</string>
+    <string name="more_about">En savoir plus</string>
+    <string name="best_sales"><u>Les meilleures ventes</u></string>
+    <string name="game_name">Nom du jeu</string>
+    <string name="game_description">Description du jeu</string>
+    <string name="editor_name">Nom de l\'éditeur</string>
+    <string name="game_price">Prix: 10,00 €</string>
 </resources>
