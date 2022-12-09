@@ -2,7 +2,6 @@ package fr.android.steam
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,14 +10,15 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_no_wish)
 
         // Show action bar
         supportActionBar?.setCustomView(R.layout.action_bar)
         supportActionBar?.setDisplayShowCustomEnabled(true)
 
         // Create list (TODO: Update when logic is implemented)
-        val recyclerview = findViewById<RecyclerView>(R.id.best_sales_list)
+        /*
+        val recyclerview = findViewById<RecyclerView>(R.id.search_result_list)
         recyclerview.layoutManager = LinearLayoutManager(this)
         val data = ArrayList<String>()
         for (i in 1..20) {
@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         }
         val adapter = CustomAdapter(data)
         recyclerview.adapter = adapter
+         */
 
         /* Test Image button in navbar
         findViewById<ImageButton>(R.id.navbar_button_like).setOnClickListener {
