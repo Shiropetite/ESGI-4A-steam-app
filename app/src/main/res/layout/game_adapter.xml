@@ -16,7 +16,7 @@
         >
 
         <ImageView
-            android:id="@+id/adapter_game_image"
+            android:id="@+id/game_icon_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -33,7 +33,7 @@
             >
 
             <TextView
-                android:id="@+id/adapter_game_name"
+                android:id="@+id/game_name_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/proxima_nova"
@@ -41,7 +41,7 @@
                 android:text="@string/game_name" />
 
             <TextView
-                android:id="@+id/adapter_game_editor_name"
+                android:id="@+id/game_publisher_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -51,7 +51,7 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/adapter_game_price"
+                android:id="@+id/game_price_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -63,7 +63,7 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/adapter_more_about"
+            android:id="@+id/game_details_btn"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:text="@string/more_about"
