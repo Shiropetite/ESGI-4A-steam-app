@@ -3,11 +3,12 @@ package fr.android.steam
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import fr.android.steam.models.Game
 
-// TODO: UPDATE
-class CustomAdapter(private val mList: List<String>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class GameAdapter(private val games: List<Game>) : RecyclerView.Adapter<GameAdapter.ViewHolder>() {
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,25 +22,27 @@ class CustomAdapter(private val mList: List<String>) : RecyclerView.Adapter<Cust
 
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        val ItemsViewModel = mList[position]
-
-        // sets the image to the imageview from our itemHolder class
-        //holder.imageView.setImageResource(ItemsViewModel)
+        val gamesView = games[position]
 
         // sets the text to the textview from our itemHolder class
-        holder.textView.text = ItemsViewModel
+        holder.name.text = gamesView.name
+        holder.publisher.text = gamesView.publisher
+        holder.price.text = gamesView.price.toString()
 
+        // sets the image to the imageview from our itemHolder class
+        //holder.icon.setImageResource(gamesView.icon)
     }
 
     // return the number of the items in the list
     override fun getItemCount(): Int {
-        return mList.size
+        return games.size
     }
 
-    // Holds the views for adding it to image and text
+    // Holds he views for adding it to image and text
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        val textView: TextView = itemView.findViewById(R.id.adapter_game_name)
+        val name: TextView = itemView.findViewById(R.id.game_name_label)
+        val publisher: TextView = itemView.findViewById(R.id.game_publisher_label)
+        val price: TextView = itemView.findViewById(R.id.game_price_label)
+        //val icon: ImageView = itemView.findViewById(R.id.game_icon_img)
     }
-
 }

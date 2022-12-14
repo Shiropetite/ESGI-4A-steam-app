@@ -1,10 +1,9 @@
-package fr.android.steam
+package fr.android.steam.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import fr.android.steam.R
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")

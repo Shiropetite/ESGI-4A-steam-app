@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".MainActivity">
+    tools:context=".activities.SignInActivity">
 
     <TextView
-        android:id="@+id/sign_in_title"
+        android:id="@+id/signin_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="62dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/sign_in_description"
+        android:id="@+id/signin_desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
@@ -32,10 +32,10 @@
         android:fontFamily="@font/proxima_nova"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in_title" />
+        app:layout_constraintTop_toBottomOf="@+id/signin_title" />
 
     <EditText
-        android:id="@+id/sign_in_input_email"
+        android:id="@+id/signin_email_input"
         android:layout_width="0dp"
         android:layout_height="46dp"
         android:layout_marginHorizontal="32dp"
@@ -51,11 +51,11 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in_description"
+        app:layout_constraintTop_toBottomOf="@+id/signin_desc"
         android:importantForAutofill="no" />
 
     <EditText
-        android:id="@+id/sign_in_input_password"
+        android:id="@+id/signin_password_input"
         android:layout_width="0dp"
         android:layout_height="46dp"
         android:layout_marginHorizontal="32dp"
@@ -71,11 +71,11 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in_input_email"
+        app:layout_constraintTop_toBottomOf="@+id/signin_email_input"
         android:autofillHints="" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/sign_in_button_sign_in"
+        android:id="@+id/signin_confirm_btn"
         android:layout_width="0dp"
         android:layout_height="46dp"
         android:layout_marginHorizontal="32dp"
@@ -87,10 +87,10 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in_input_password" />
+        app:layout_constraintTop_toBottomOf="@+id/signin_password_input" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/sign_in_button_sign_up"
+        android:id="@+id/signin_goto_signup_btn"
         android:layout_width="0dp"
         android:layout_height="46dp"
         android:layout_marginHorizontal="32dp"
@@ -102,10 +102,10 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in_button_sign_in" />
+        app:layout_constraintTop_toBottomOf="@+id/signin_confirm_btn" />
 
     <TextView
-        android:id="@+id/sign_in_forget_password"
+        android:id="@+id/signin_goto_lpass_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
