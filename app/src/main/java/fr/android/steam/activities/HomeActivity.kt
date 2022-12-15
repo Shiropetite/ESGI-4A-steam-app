@@ -1,13 +1,15 @@
 package fr.android.steam.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.android.steam.GameAdapter
 import fr.android.steam.R
+import fr.android.steam.models.ApplicationUser
 import fr.android.steam.services.GameService
 
 class HomeActivity : AppCompatActivity() {
@@ -17,6 +19,9 @@ class HomeActivity : AppCompatActivity() {
 
         supportActionBar?.setCustomView(R.layout.action_bar)
         supportActionBar?.setDisplayShowCustomEnabled(true)
+
+        val user = intent.extras?.getParcelable("fr.android.steam.models.ApplicationUser") as ApplicationUser?
+        Log.d("@@@@@@@@@@@@@@@@@@@@@@@", user.toString())
 
         val recyclerview = findViewById<RecyclerView>(R.id.home_topsales_list)
         recyclerview.layoutManager = LinearLayoutManager(this)
