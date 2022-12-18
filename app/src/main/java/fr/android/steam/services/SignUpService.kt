@@ -11,7 +11,7 @@ import org.json.JSONObject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class SignInService(
+class SignUpService(
     val context: Context
 ) : Service() {
 
@@ -19,29 +19,34 @@ class SignInService(
         TODO("Not yet implemented")
     }
 
-    suspend fun signIn(email: String, password: String): JSONObject
+    suspend fun signUp(name: String, email: String, password: String): JSONObject
         = suspendCoroutine { cont ->
         // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(context)
-        val url = getSignInUrl(email, password)
+        val url = getSignUpUrl();
+
+        val body = JSONObject()
+        body.put("name", name);
+        body.put("email", email);
+        body.put("password", password);
 
         // Request a string response from the provided URL.
         val jsonRequest = JsonObjectRequest(
-            Request.Method.GET, url, null,
+            Request.Method.POST, url, body,
             { response ->
                 cont.resume(response)
             },
             {
-                cont.resume(JSONObject().put("error", "error_occurred"))
-            }
+                cont.resume(JSONObject().put("error", "user_already_exist"))
+            },
         )
 
         // Add the request to the RequestQueue.
         queue.add(jsonRequest)
     }
 
-    private fun getSignInUrl(email: String, password: String): String {
-        return "http://10.0.2.2:3000/users/signin?email=${email}&pwd=${password}"
+    private fun getSignUpUrl(): String {
+        return "http://10.0.2.2:3000/users/signup"
     }
 
 }

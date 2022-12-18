@@ -27,6 +27,8 @@ class SignInActivity : AppCompatActivity(), CoroutineScope {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
+        supportActionBar?.hide()
+
         StrictMode.setThreadPolicy(ThreadPolicy.Builder().permitAll().build())
 
         findViewById<AppCompatButton>(R.id.signin_confirm_btn).setOnClickListener {
@@ -50,26 +52,25 @@ class SignInActivity : AppCompatActivity(), CoroutineScope {
         job = Job()
         launch {
             val data = SignInService(this@SignInActivity).signIn(email, password)
-            //Log.d("#######################", data.toString())
-            val user = ApplicationUser(
-                data.getString("name"),
-                data.getString("email"),
-                data.getString("password"),
-                parseJSONGames(data.getJSONArray("likedGames")),
-                parseJSONGames(data.getJSONArray("wishlistedGames")),
-            )
-            //Log.d("@@@@@@@@@@@@@@@@@@@@@@@", user.toString())
 
-            if (user != null) {
+            if(data.has("error")) {
+                Toast.makeText(
+                    this@SignInActivity,
+                    "Les informations de connexion sont incorrect. Veuillez réessayer",
+                    Toast.LENGTH_SHORT).show()
+            }
+            else {
+                val user = ApplicationUser(
+                    data.getString("name"),
+                    data.getString("email"),
+                    data.getString("password"),
+                    parseJSONGames(data.getJSONArray("likedGames")),
+                    parseJSONGames(data.getJSONArray("wishlistedGames")),
+                )
+
                 intent.putExtra("fr.android.steam.models.ApplicationUser", user)
                 startActivity(Intent(applicationContext, HomeActivity::class.java))
                 finish()
-            }
-            else {
-                Toast.makeText(
-                this@SignInActivity,
-                "Invalid credentials. Try again.",
-                Toast.LENGTH_SHORT).show()
             }
         }
     }
