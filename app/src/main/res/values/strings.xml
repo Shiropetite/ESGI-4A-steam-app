@@ -30,7 +30,7 @@
     <string name="no_wish_title">Votre wishlist est vide !</string>
     <string name="no_wish_description">Cliquez sur l\'étoile lorsque vous consultez un jeu l\'ajouter.</string>
     <string name="search_nb_result"><u>Nombre de résultats : 42</u></string>
-    <string  name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia ornare tortor sodales hendrerit. Phasellus enim diam, vestibulum nec augue sed, laoreet maximus orci. Praesent purus neque, lobortis at molestie vitae, blandit et enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo risus, sagittis ut mi vitae, luctus bibendum lectus. Nunc porttitor velit sapien, eget interdum dolor interdum et. Donec tortor risus, malesuada quis aliquet eget, facilisis sed ante. Etiam feugiat in nibh eu accumsan.</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia ornare tortor sodales hendrerit. Phasellus enim diam, vestibulum nec augue sed, laoreet maximus orci. Praesent purus neque, lobortis at molestie vitae, blandit et enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo risus, sagittis ut mi vitae, luctus bibendum lectus. Nunc porttitor velit sapien, eget interdum dolor interdum et. Donec tortor risus, malesuada quis aliquet eget, facilisis sed ante. Etiam feugiat in nibh eu accumsan.</string>
     <string name="description">Description</string>
     <string name="reviews">Avis</string>
 </resources>

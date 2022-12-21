@@ -9,7 +9,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_no_wish)
+        setContentView(R.layout.activity_empty_wishlist)
 
         // Show action bar
         supportActionBar?.setCustomView(R.layout.action_bar)

@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import fr.android.steam.R
 import fr.android.steam.models.ApplicationUser
+import fr.android.steam.services.GameService
 import fr.android.steam.services.SignUpService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,6 +18,7 @@ import org.json.JSONArray
 import kotlin.coroutines.CoroutineContext
 
 class SignUpActivity : AppCompatActivity(), CoroutineScope {
+
     protected lateinit var job: Job
     override val coroutineContext: CoroutineContext get() = job + Dispatchers.Main
 
@@ -40,7 +42,7 @@ class SignUpActivity : AppCompatActivity(), CoroutineScope {
         }
     }
 
-    fun signUp(name: String, email: String, password: String, verificationPassword: String) {
+    private fun signUp(name: String, email: String, password: String, verificationPassword: String) {
         if (password != verificationPassword) {
             Toast.makeText(
                 this@SignUpActivity,
@@ -53,29 +55,31 @@ class SignUpActivity : AppCompatActivity(), CoroutineScope {
         launch {
             val data = SignUpService(this@SignUpActivity).signUp(name, email, password)
 
-            if(data.has("error")) {
+            if (data.has("error")) {
                 Toast.makeText(
-                    this@SignUpActivity,
-                    "Cet adresse email est déjà utilisée",
-                    Toast.LENGTH_SHORT).show()
+                this@SignUpActivity,
+                "Cet adresse email est déjà utilisée",
+                Toast.LENGTH_SHORT).show()
             }
             else {
                 val user = ApplicationUser(
                     data.getString("name"),
                     data.getString("email"),
                     data.getString("password"),
-                    parseJSONGames(data.getJSONArray("likedGames")),
-                    parseJSONGames(data.getJSONArray("wishlistedGames")),
+                    parseJSONGamesIDs(data.getJSONArray("likedGames")),
+                    parseJSONGamesIDs(data.getJSONArray("wishlistedGames")),
                 )
 
-                intent.putExtra("fr.android.steam.models.ApplicationUser", user)
+                val bundle = Bundle()
+                bundle.putParcelable("_user", user)
+                intent.putExtra("_bundle", bundle)
                 startActivity(Intent(applicationContext, HomeActivity::class.java))
                 finish()
             }
         }
     }
 
-    private fun parseJSONGames(jsonGames: JSONArray): List<String> {
+    private fun parseJSONGamesIDs(jsonGames: JSONArray): List<String> {
         val games: MutableList<String> = mutableListOf()
         (0 until jsonGames.length()).forEach { i ->
             games.add(jsonGames.getString(i))

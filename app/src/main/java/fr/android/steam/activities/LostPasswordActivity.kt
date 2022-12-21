@@ -9,6 +9,7 @@ import androidx.appcompat.widget.AppCompatButton
 import fr.android.steam.R
 
 class LostPasswordActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lost_password)
@@ -24,7 +25,7 @@ class LostPasswordActivity : AppCompatActivity() {
         }
     }
 
-    fun resetPassword(email: String) {
+    private fun resetPassword(email: String) {
         Toast.makeText(
         this@LostPasswordActivity,
         "Reset password email sent to $email",

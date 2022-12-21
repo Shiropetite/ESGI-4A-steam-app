@@ -9,108 +9,98 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import fr.android.steam.GameAdapter
+import fr.android.steam.R
+import fr.android.steam.activities.likelist.EmptyLikelistActivity
+import fr.android.steam.activities.wishlist.EmptyWishlistActivity
 import fr.android.steam.models.ApplicationUser
-import fr.android.steam.models.Game
 import fr.android.steam.services.GameService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import org.json.JSONArray
-import org.json.JSONObject
 import kotlin.coroutines.CoroutineContext
 
 
 class HomeActivity : AppCompatActivity(), CoroutineScope {
+
     protected lateinit var job: Job
     override val coroutineContext: CoroutineContext get() = job + Dispatchers.Main
+
     private lateinit var recyclerView: RecyclerView
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(fr.android.steam.R.layout.activity_home)
+        setContentView(R.layout.activity_home)
 
-        supportActionBar?.setCustomView(fr.android.steam.R.layout.action_bar)
+        supportActionBar?.setCustomView(R.layout.action_bar)
         supportActionBar?.setDisplayShowCustomEnabled(true)
 
-        val user = intent.extras?.getParcelable("fr.android.steam.models.ApplicationUser") as ApplicationUser?
+        val bundle = intent.getBundleExtra("_bundle")
+        val user = bundle?.getParcelable("_user") as ApplicationUser?
         Log.d("@@@@@@@@@@@@@@@@@@@@@@@", user.toString())
 
-        recyclerView = findViewById(fr.android.steam.R.id.home_topsales_list)
+        recyclerView = findViewById(R.id.home_topsales_list)
         recyclerView.layoutManager = LinearLayoutManager(this@HomeActivity)
         val adapter = GameAdapter(this, listOf())
         recyclerView.adapter = adapter
 
         getTopGames()
 
-        findViewById<TextView>(fr.android.steam.R.id.home_search_input).setOnClickListener {
+        findViewById<AppCompatButton>(R.id.home_search_input).setOnClickListener {
             startActivity(Intent(applicationContext, SearchActivity::class.java))
             finish()
         }
 
-        findViewById<ImageButton>(fr.android.steam.R.id.navbar_button_like).setOnClickListener {
-            Toast.makeText(this@HomeActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
+        findViewById<ImageButton>(R.id.navbar_button_like).setOnClickListener {
+            startActivity(Intent(applicationContext, EmptyLikelistActivity::class.java))
+            finish()
         }
 
-        findViewById<ImageButton>(fr.android.steam.R.id.navbar_button_wishlist).setOnClickListener {
-            Toast.makeText(this@HomeActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
+        findViewById<ImageButton>(R.id.navbar_button_wishlist).setOnClickListener {
+            startActivity(Intent(applicationContext, EmptyWishlistActivity::class.java))
+            finish()
         }
     }
 
-    fun getTopGames() {
+    private fun getTopGames() {
         job = Job()
         launch {
             val data = GameService(this@HomeActivity).getTopGames()
 
-            if(data.has("error")) {
+            if (data.has("error")) {
                 Toast.makeText(
-                    this@HomeActivity,
-                    "Une erreur est intervenue",
-                    Toast.LENGTH_SHORT).show()
+                this@HomeActivity,
+                "Une erreur est survenue",
+                Toast.LENGTH_SHORT).show()
             }
             else {
-                val gameList = parseJSONGames(data.getJSONArray("games"))
+                val games = GameService(this@HomeActivity).parseJSONGames(data.getJSONArray("games"))
 
-                val backgroundImage = findViewById<ImageView>(fr.android.steam.R.id.home_game_background_image)
+                val backgroundImage = findViewById<ImageView>(R.id.home_game_background_image)
                 Glide.with(this@HomeActivity)
-                    .load(gameList[0].background_image)
+                    .load(games[0].background_image)
                     .centerCrop()
                     .into(backgroundImage);
 
-                val miniImage = findViewById<ImageView>(fr.android.steam.R.id.home_game_mini_image)
+                val miniImage = findViewById<ImageView>(R.id.home_game_mini_image)
                 Glide.with(this@HomeActivity)
-                    .load(gameList[0].mini_image)
+                    .load(games[0].mini_image)
                     .centerCrop()
                     .into(miniImage);
 
-                findViewById<TextView>(fr.android.steam.R.id.home_game_name_label).text = gameList[0].name
-                findViewById<TextView>(fr.android.steam.R.id.home_game_desc_label).text = gameList[0].description
+                findViewById<TextView>(R.id.home_game_name_label).text = games[0].name
+                findViewById<TextView>(R.id.home_game_desc_label).text = games[0].description
 
                 // add list
-                val adapter = GameAdapter(this@HomeActivity, gameList.subList(1, gameList.size))
+                val adapter = GameAdapter(this@HomeActivity, games.subList(1, games.size))
                 recyclerView.adapter = adapter
-
             }
         }
-    }
-
-    private fun parseJSONGames(jsonGames: JSONArray): List<Game> {
-        val games: MutableList<Game> = mutableListOf()
-        (0 until jsonGames.length()).forEach { i ->
-            val currentGame: JSONObject = jsonGames.get(i) as JSONObject
-            games.add(Game(
-                currentGame.getString("name"),
-                currentGame.getString("description"),
-                currentGame.getString("publisher"),
-                currentGame.getString("price"),
-                currentGame.getString("mini_image"),
-                currentGame.getString("bg_image")))
-        }
-        return games
     }
 }
