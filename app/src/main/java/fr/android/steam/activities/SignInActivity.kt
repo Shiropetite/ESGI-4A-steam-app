@@ -67,25 +67,18 @@ class SignInActivity : AppCompatActivity(), CoroutineScope {
                     data.getString("name"),
                     data.getString("email"),
                     data.getString("password"),
-                    parseJSONGamesIDs(data.getJSONArray("likedGames")),
-                    parseJSONGamesIDs(data.getJSONArray("wishlistedGames")),
+                    GameService(this@SignInActivity).parseJSONGames(data.getJSONArray("likedGames")),
+                    GameService(this@SignInActivity).parseJSONGames(data.getJSONArray("wishlistedGames")),
                 )
                 Log.d("#######################", user.toString())
 
                 val bundle = Bundle()
                 bundle.putParcelable("_user", user)
-                intent.putExtra("_bundle", bundle)
-                startActivity(Intent(applicationContext, HomeActivity::class.java))
+                val i = Intent(applicationContext, HomeActivity::class.java)
+                i.putExtra("_bundle", bundle)
+                startActivity(i)
                 finish()
             }
         }
-    }
-
-    private fun parseJSONGamesIDs(jsonGames: JSONArray): List<String> {
-        val games: MutableList<String> = mutableListOf()
-        (0 until jsonGames.length()).forEach { i ->
-            games.add(jsonGames.getString(i))
-        }
-        return games
     }
 }

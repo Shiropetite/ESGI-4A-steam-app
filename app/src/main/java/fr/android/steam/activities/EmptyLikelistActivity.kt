@@ -1,4 +1,4 @@
-package fr.android.steam.activities.likelist
+package fr.android.steam.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

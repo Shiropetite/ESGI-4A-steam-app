@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.GameDetailsActivity">
 
     <ImageView
-        android:id="@+id/detail_description_cover_image"
+        android:id="@+id/game_details_cover_img"
         android:layout_width="match_parent"
         android:layout_height="260dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,7 +16,7 @@
         app:srcCompat="@color/input" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/detail_description_background_image"
+        android:id="@+id/game_details_bg_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
@@ -27,7 +27,7 @@
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detail_description_cover_image">
+        app:layout_constraintTop_toBottomOf="@+id/game_details_cover_img">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/adapter_game_image"
+                android:id="@+id/game_details_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -49,7 +49,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/detail_description_image"
+                    android:id="@+id/game_details_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/proxima_nova"
@@ -57,7 +57,7 @@
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/detail_description_name"
+                    android:id="@+id/game_details_publisher"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
@@ -67,7 +67,7 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/detail_description_price"
+                    android:id="@+id/game_details_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -91,10 +91,10 @@
         android:layout_weight="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detail_description_background_image">
+        app:layout_constraintTop_toBottomOf="@+id/game_details_bg_img">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/detail_description_enable"
+            android:id="@+id/game_details_link"
             android:layout_weight=".5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -106,7 +106,7 @@
             android:textColor="@color/white" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/detail_review_disable"
+            android:id="@+id/game_details_goto_reviews"
             android:layout_weight=".5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -120,7 +120,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/detail_description_text"
+        android:id="@+id/game_details_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

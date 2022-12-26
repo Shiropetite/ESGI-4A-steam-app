@@ -58,28 +58,42 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".LikeActivity"
+            android:name=".activities.LikelistActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activities.likelist.EmptyLikelistActivity"
+            android:name=".activities.EmptyLikelistActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activities.wishlist.WishlistActivity"
+            android:name=".activities.WishlistActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activities.wishlist.EmptyWishlistActivity"
+            android:name=".activities.EmptyWishlistActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activities.GameReviewsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activities.GameDetailsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

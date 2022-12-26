@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.likelist.LikelistActivity">
+    tools:context=".activities.LikelistActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/like_list"
+        android:id="@+id/likelist_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"

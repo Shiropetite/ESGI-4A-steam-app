@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import fr.android.steam.GameAdapter
 import fr.android.steam.R
-import fr.android.steam.activities.likelist.EmptyLikelistActivity
-import fr.android.steam.activities.wishlist.EmptyWishlistActivity
 import fr.android.steam.models.ApplicationUser
 import fr.android.steam.services.GameService
 import kotlinx.coroutines.CoroutineScope
@@ -58,13 +56,33 @@ class HomeActivity : AppCompatActivity(), CoroutineScope {
         }
 
         findViewById<ImageButton>(R.id.navbar_button_like).setOnClickListener {
-            startActivity(Intent(applicationContext, EmptyLikelistActivity::class.java))
-            finish()
+            if (user?.likedGames?.isEmpty() == true) {
+                startActivity(Intent(applicationContext, EmptyLikelistActivity::class.java))
+                finish()
+            }
+            else {
+                val bundle = Bundle()
+                bundle.putParcelable("_user", user)
+                val i = Intent(applicationContext, LikelistActivity::class.java)
+                i.putExtra("_bundle", bundle)
+                startActivity(i)
+                finish()
+            }
         }
 
         findViewById<ImageButton>(R.id.navbar_button_wishlist).setOnClickListener {
-            startActivity(Intent(applicationContext, EmptyWishlistActivity::class.java))
-            finish()
+            if (user?.wishListedGames?.isEmpty() == true) {
+                startActivity(Intent(applicationContext, EmptyWishlistActivity::class.java))
+                finish()
+            }
+            else {
+                val bundle = Bundle()
+                bundle.putParcelable("_user", user)
+                val i = Intent(applicationContext, WishlistActivity::class.java)
+                i.putExtra("_bundle", bundle)
+                startActivity(i)
+                finish()
+            }
         }
     }
 

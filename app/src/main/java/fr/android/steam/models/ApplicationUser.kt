@@ -7,16 +7,16 @@ data class ApplicationUser(
     val username: String?,
     val email: String?,
     val password: String?,
-    val likedGames: List<String>?,
-    val wishListedGames: List<String>?
+    val likedGames: List<Game>?,
+    val wishListedGames: List<Game>?
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.createStringArrayList(),
-        parcel.createStringArrayList()
+        parcel.createTypedArrayList(Game.CREATOR),
+        parcel.createTypedArrayList(Game.CREATOR)
     ) {
     }
 
@@ -24,8 +24,8 @@ data class ApplicationUser(
         parcel.writeString(username)
         parcel.writeString(email)
         parcel.writeString(password)
-        parcel.writeStringList(likedGames)
-        parcel.writeStringList(wishListedGames)
+        parcel.writeTypedList(likedGames)
+        parcel.writeTypedList(wishListedGames)
     }
 
     override fun describeContents(): Int {

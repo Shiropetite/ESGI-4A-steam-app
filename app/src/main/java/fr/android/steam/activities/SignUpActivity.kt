@@ -66,8 +66,8 @@ class SignUpActivity : AppCompatActivity(), CoroutineScope {
                     data.getString("name"),
                     data.getString("email"),
                     data.getString("password"),
-                    parseJSONGamesIDs(data.getJSONArray("likedGames")),
-                    parseJSONGamesIDs(data.getJSONArray("wishlistedGames")),
+                    GameService(this@SignUpActivity).parseJSONGames(data.getJSONArray("likedGames")),
+                    GameService(this@SignUpActivity).parseJSONGames(data.getJSONArray("wishlistedGames")),
                 )
 
                 val bundle = Bundle()
@@ -77,13 +77,5 @@ class SignUpActivity : AppCompatActivity(), CoroutineScope {
                 finish()
             }
         }
-    }
-
-    private fun parseJSONGamesIDs(jsonGames: JSONArray): List<String> {
-        val games: MutableList<String> = mutableListOf()
-        (0 until jsonGames.length()).forEach { i ->
-            games.add(jsonGames.getString(i))
-        }
-        return games
     }
 }
