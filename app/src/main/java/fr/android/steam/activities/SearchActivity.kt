@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import fr.android.steam.GameAdapter
+import fr.android.steam.adapters.GameAdapter
 import fr.android.steam.R
 import fr.android.steam.services.GameService
 import kotlinx.coroutines.CoroutineScope

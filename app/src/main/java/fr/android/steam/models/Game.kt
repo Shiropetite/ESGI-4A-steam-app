@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Game(
+    val id: String?,
     val name: String?,
     val description: String?,
     val publisher: String?,
@@ -19,10 +20,12 @@ data class Game(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readString(),
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
         parcel.writeString(name)
         parcel.writeString(description)
         parcel.writeString(publisher)

@@ -13,7 +13,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import fr.android.steam.GameAdapter
+import fr.android.steam.adapters.GameAdapter
 import fr.android.steam.R
 import fr.android.steam.models.ApplicationUser
 import fr.android.steam.services.GameService
@@ -41,7 +41,6 @@ class HomeActivity : AppCompatActivity(), CoroutineScope {
 
         val bundle = intent.getBundleExtra("_bundle")
         val user = bundle?.getParcelable("_user") as ApplicationUser?
-        Log.d("@@@@@@@@@@@@@@@@@@@@@@@", user.toString())
 
         recyclerView = findViewById(R.id.home_topsales_list)
         recyclerView.layoutManager = LinearLayoutManager(this@HomeActivity)
@@ -114,6 +113,15 @@ class HomeActivity : AppCompatActivity(), CoroutineScope {
 
                 findViewById<TextView>(R.id.home_game_name_label).text = games[0].name
                 findViewById<TextView>(R.id.home_game_desc_label).text = games[0].description
+
+                findViewById<AppCompatButton>(R.id.home_game_details_btn).setOnClickListener {
+                    val bundle = Bundle()
+                    bundle.putParcelable("_game", games[0])
+                    val i = Intent(applicationContext, GameDetailsActivity::class.java)
+                    i.putExtra("_bundle", bundle)
+                    startActivity(i)
+                    finish()
+                }
 
                 // add list
                 val adapter = GameAdapter(this@HomeActivity, games.subList(1, games.size))

@@ -1,14 +1,21 @@
-package fr.android.steam
+package fr.android.steam.adapters
 
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import fr.android.steam.R
+import fr.android.steam.activities.GameDetailsActivity
 import fr.android.steam.models.Game
+
 
 class GameAdapter(
     private val context: Context,
@@ -23,16 +30,24 @@ class GameAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val gamesView = games[position]
+        val game = games[position]
 
-        holder.name.text = gamesView.name
-        holder.publisher.text = gamesView.publisher
-        holder.price.text = gamesView.price
+        holder.name.text = game.name
+        holder.publisher.text = game.publisher
+        holder.price.text = game.price
 
         Glide.with(context)
-            .load(gamesView.mini_image)
+            .load(game.mini_image)
             .centerCrop()
-            .into(holder.mini_image);
+            .into(holder.mini_image)
+
+        holder.details_link.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putParcelable("_game", game)
+            val i = Intent(context, GameDetailsActivity::class.java)
+            i.putExtra("_bundle", bundle)
+            startActivity(context, i, bundle)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -44,5 +59,6 @@ class GameAdapter(
         val publisher: TextView = itemView.findViewById(R.id.game_publisher_label)
         val price: TextView = itemView.findViewById(R.id.game_price_label)
         val mini_image: ImageView = itemView.findViewById(R.id.game_icon_img)
+        val details_link: AppCompatButton = itemView.findViewById(R.id.game_details_btn)
     }
 }

@@ -8,6 +8,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import fr.android.steam.models.Game
+import fr.android.steam.models.GameReview
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.coroutines.resume
@@ -76,6 +77,7 @@ class GameService(
         (0 until jsonGames.length()).forEach { i ->
             val currentGame: JSONObject = jsonGames.get(i) as JSONObject
             games.add(Game(
+                currentGame.getString("id"),
                 currentGame.getString("name"),
                 currentGame.getString("description"),
                 currentGame.getString("publisher"),

@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import fr.android.steam.GameAdapter
+import fr.android.steam.adapters.GameAdapter
 import fr.android.steam.R
 import fr.android.steam.models.ApplicationUser
 
