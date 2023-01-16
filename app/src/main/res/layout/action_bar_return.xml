@@ -1,0 +1,57 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+    android:layout_width = "match_parent"
+    android:layout_height = "wrap_content"
+    android:gravity = "center_vertical"
+    android:paddingVertical="14dp"
+    android:paddingHorizontal="4dp"
+    android:weightSum = "1"
+    android:baselineAligned="false">
+
+    <LinearLayout
+        android:layout_width = "0dp"
+        android:layout_height = "match_parent"
+        android:layout_weight = "0.6">
+
+        <ImageButton
+            android:id="@+id/navbar_button_back"
+            android:layout_width = "wrap_content"
+            android:layout_height = "match_parent"
+            android:layout_marginStart="10dp"
+            android:background="@null"
+            android:src = "@drawable/back_arrow" />
+
+        <TextView
+            android:id="@+id/navbar_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/google_sans_bold"
+            android:text="@string/home"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width = "0dp"
+        android:layout_height = "match_parent"
+        android:layout_marginEnd = "10dp"
+        android:layout_weight = "0.4"
+        android:gravity = "end">
+        <ImageButton
+            android:id="@+id/navbar_button_like"
+            android:layout_width = "wrap_content"
+            android:layout_height = "match_parent"
+            android:background="@null"
+            android:src = "@drawable/like" />
+
+        <ImageButton
+            android:id="@+id/navbar_button_wishlist"
+            android:layout_width = "wrap_content"
+            android:layout_height = "match_parent"
+            android:layout_marginStart = "30dp"
+            android:background="@null"
+            android:src = "@drawable/wishlist" />
+    </LinearLayout>
+
+</LinearLayout>

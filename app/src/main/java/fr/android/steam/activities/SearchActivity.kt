@@ -1,5 +1,6 @@
 package fr.android.steam.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -27,16 +28,18 @@ class SearchActivity : AppCompatActivity(), CoroutineScope {
 
     private lateinit var recyclerView: RecyclerView
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        supportActionBar?.setCustomView(R.layout.action_bar)
+        supportActionBar?.setCustomView(R.layout.action_bar_return)
         supportActionBar?.setDisplayShowCustomEnabled(true)
+        findViewById<TextView>(R.id.navbar_title).text = "Recherche"
 
         recyclerView = findViewById(R.id.search_results)
         recyclerView.layoutManager = LinearLayoutManager(this@SearchActivity)
-        val adapter = GameAdapter(this, listOf())
+        val adapter = GameAdapter(listOf())
         recyclerView.adapter = adapter
 
         /* recherche avec fire semi-temps réel
@@ -80,7 +83,7 @@ class SearchActivity : AppCompatActivity(), CoroutineScope {
                 val count = data.getInt("count")
                 val games = GameService(this@SearchActivity).parseJSONGames(data.getJSONArray("games"))
                 findViewById<TextView>(R.id.search_results_title).text = "Nombre de résultats : $count"
-                val adapter = GameAdapter(this@SearchActivity, games)
+                val adapter = GameAdapter(games)
                 recyclerView.adapter = adapter
             }
         }

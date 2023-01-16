@@ -3,7 +3,6 @@ package fr.android.steam.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -36,7 +35,7 @@ class HomeActivity : AppCompatActivity(), CoroutineScope {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        supportActionBar?.setCustomView(R.layout.action_bar)
+        supportActionBar?.setCustomView(R.layout.action_bar_home)
         supportActionBar?.setDisplayShowCustomEnabled(true)
 
         val bundle = intent.getBundleExtra("_bundle")
@@ -44,7 +43,7 @@ class HomeActivity : AppCompatActivity(), CoroutineScope {
 
         recyclerView = findViewById(R.id.home_topsales_list)
         recyclerView.layoutManager = LinearLayoutManager(this@HomeActivity)
-        val adapter = GameAdapter(this, listOf())
+        val adapter = GameAdapter(listOf())
         recyclerView.adapter = adapter
 
         getTopGames()
@@ -98,6 +97,8 @@ class HomeActivity : AppCompatActivity(), CoroutineScope {
             }
             else {
                 val games = GameService(this@HomeActivity).parseJSONGames(data.getJSONArray("games"))
+                val adapter = GameAdapter(games.subList(1, games.size))
+                recyclerView.adapter = adapter
 
                 val backgroundImage = findViewById<ImageView>(R.id.home_game_background_image)
                 Glide.with(this@HomeActivity)
@@ -123,9 +124,6 @@ class HomeActivity : AppCompatActivity(), CoroutineScope {
                     finish()
                 }
 
-                // add list
-                val adapter = GameAdapter(this@HomeActivity, games.subList(1, games.size))
-                recyclerView.adapter = adapter
             }
         }
     }

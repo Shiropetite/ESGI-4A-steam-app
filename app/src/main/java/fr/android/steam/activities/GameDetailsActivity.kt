@@ -38,6 +38,10 @@ class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_details)
 
+        supportActionBar?.setCustomView(R.layout.action_bar_return)
+        supportActionBar?.setDisplayShowCustomEnabled(true)
+        findViewById<TextView>(R.id.navbar_title).text = "Détail du jeu"
+
         val bundle = intent.getBundleExtra("_bundle")
         val game = bundle?.getParcelable("_game") as Game?
 

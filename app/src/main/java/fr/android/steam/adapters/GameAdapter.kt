@@ -15,14 +15,17 @@ import com.bumptech.glide.Glide
 import fr.android.steam.R
 import fr.android.steam.activities.GameDetailsActivity
 import fr.android.steam.models.Game
+import kotlinx.coroutines.NonDisposableHandle.parent
 
 
 class GameAdapter(
-    private val context: Context,
     private val games: List<Game>
 ) : RecyclerView.Adapter<GameAdapter.ViewHolder>() {
 
+    private lateinit var context: Context
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        context = parent.context
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.game_adapter, parent, false)
 

@@ -14,6 +14,8 @@ class LostPasswordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lost_password)
 
+        supportActionBar?.hide()
+
         findViewById<AppCompatButton>(R.id.lpass_confirm_btn).setOnClickListener {
             val email = findViewById<TextView>(R.id.lpass_email_input).text.toString()
             resetPassword(email)
