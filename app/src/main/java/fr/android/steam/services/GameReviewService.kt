@@ -54,7 +54,7 @@ class GameReviewService(
                 GameReview(
                 currentGame.getString("name"),
                 currentGame.getBoolean("good_grade"),
-                currentGame.getString("reviews"))
+                currentGame.getString("review"))
             )
         }
         return reviews

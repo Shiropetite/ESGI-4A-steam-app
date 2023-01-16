@@ -11,6 +11,7 @@ data class Game(
     val price: String?,
     val mini_image: String?,
     val background_image: String?,
+    val cover_image: String?
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
@@ -21,6 +22,7 @@ data class Game(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readString()
     ) {
     }
 
@@ -32,6 +34,7 @@ data class Game(
         parcel.writeString(price)
         parcel.writeString(mini_image)
         parcel.writeString(background_image)
+        parcel.writeString(cover_image)
     }
 
     override fun describeContents(): Int {

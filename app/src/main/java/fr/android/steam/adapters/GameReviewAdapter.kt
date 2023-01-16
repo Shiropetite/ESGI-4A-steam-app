@@ -16,7 +16,7 @@ class GameReviewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.game_adapter, parent, false)
+            .inflate(R.layout.review_adapter, parent, false)
 
         return ViewHolder(view)
     }
@@ -25,8 +25,11 @@ class GameReviewAdapter(
         val review = reviews[position]
 
         holder.name.text = review.name
-        //holder.good_grade = review.good_grade
         holder.review.text = review.text
+
+        if (!review.good_grade) {
+           holder.good_grade.setImageResource(R.drawable.thumb_down)
+        }
     }
 
     override fun getItemCount(): Int {

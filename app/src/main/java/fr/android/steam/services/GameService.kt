@@ -83,7 +83,8 @@ class GameService(
                 currentGame.getString("publisher"),
                 currentGame.getString("price"),
                 currentGame.getString("mini_image"),
-                currentGame.getString("bg_image")))
+                currentGame.getString("bg_image"),
+                currentGame.getString("cover_image")))
         }
         return games
     }
