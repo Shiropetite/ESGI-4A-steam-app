@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="260dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@color/input" />
@@ -79,6 +80,7 @@
             </LinearLayout>
 
         </LinearLayout>
+
     </com.google.android.material.card.MaterialCardView>
 
     <LinearLayout
@@ -144,5 +146,24 @@
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
+    <ImageButton
+        android:id="@+id/game_details_button_like"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="303dp"
+        android:background="@null"
+        android:src="@drawable/like"
+        app:layout_constraintBottom_toTopOf="@+id/game_details_bg_img"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/game_details_button_wishlist"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="343dp"
+        android:background="@null"
+        android:src="@drawable/wishlist"
+        app:layout_constraintBottom_toTopOf="@+id/game_details_bg_img"
+        app:layout_constraintStart_toStartOf="@+id/game_details_cover_img" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

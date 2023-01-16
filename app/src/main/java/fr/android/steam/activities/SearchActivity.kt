@@ -3,6 +3,8 @@ package fr.android.steam.activities
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -37,6 +39,8 @@ class SearchActivity : AppCompatActivity(), CoroutineScope {
         val adapter = GameAdapter(this, listOf())
         recyclerView.adapter = adapter
 
+        /* recherche avec fire semi-temps réel
+         * risque de blacklist de l'api steam
         findViewById<EditText>(R.id.search_searchbar).addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) { }
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
@@ -45,6 +49,19 @@ class SearchActivity : AppCompatActivity(), CoroutineScope {
                     findByName(s.toString())
                 }
             }
+        })
+        */
+
+        findViewById<EditText>(R.id.search_searchbar).setOnEditorActionListener(TextView.OnEditorActionListener {
+                v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH
+                || actionId == EditorInfo.IME_ACTION_DONE
+                || event.action == KeyEvent.ACTION_DOWN
+                && event.keyCode == KeyEvent.KEYCODE_ENTER) {
+                findByName(findViewById<EditText>(R.id.search_searchbar).text.toString())
+                return@OnEditorActionListener true
+            }
+            false
         })
     }
 
