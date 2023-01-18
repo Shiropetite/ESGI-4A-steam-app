@@ -2,7 +2,6 @@ package fr.android.steam.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,10 +15,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import fr.android.steam.R
 import fr.android.steam.adapters.GameReviewAdapter
-import fr.android.steam.models.ApplicationUser
 import fr.android.steam.models.Game
-import fr.android.steam.models.GameReview
 import fr.android.steam.services.GameReviewService
+import fr.android.steam.services.SessionService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -28,7 +26,7 @@ import kotlin.coroutines.CoroutineContext
 
 class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
 
-    protected lateinit var job: Job
+    private lateinit var job: Job
     override val coroutineContext: CoroutineContext get() = job + Dispatchers.Main
 
     private lateinit var recyclerView: RecyclerView
@@ -38,12 +36,19 @@ class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_details)
 
-        supportActionBar?.setCustomView(R.layout.action_bar_return)
-        supportActionBar?.setDisplayShowCustomEnabled(true)
-        findViewById<TextView>(R.id.navbar_title).text = "Détail du jeu"
+        initNavbar()
 
+        // Get game
         val bundle = intent.getBundleExtra("_bundle")
         val game = bundle?.getParcelable("_game") as Game?
+
+        // Get user
+        val user = SessionService.getCurrentUser()
+        val likeButton = findViewById<ImageButton>(R.id.game_details_button_like)
+        val wishButton = findViewById<ImageButton>(R.id.game_details_button_wishlist)
+
+        if(user.likedGames?.contains(game) == true) { likeButton.setImageResource(R.drawable.like_full); }
+        if(user.wishListedGames?.contains(game) == true) { wishButton.setImageResource(R.drawable.wish_full); }
 
         findViewById<TextView>(R.id.game_details_name).text = game?.name
         findViewById<TextView>(R.id.game_details_publisher).text = game?.publisher
@@ -86,6 +91,27 @@ class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
         }
 
         getGameReviews(game?.id.orEmpty())
+    }
+
+    private fun initNavbar() {
+        supportActionBar?.setCustomView(R.layout.action_bar_return)
+        supportActionBar?.setDisplayShowCustomEnabled(true)
+        findViewById<TextView>(R.id.navbar_title).text = getString(R.string.title_game_detail)
+
+        findViewById<ImageButton>(R.id.navbar_button_back).setOnClickListener {
+            startActivity(Intent(applicationContext, HomeActivity::class.java))
+            finish()
+        }
+
+        findViewById<ImageButton>(R.id.navbar_button_like).setOnClickListener {
+            startActivity(Intent(applicationContext, LikelistActivity::class.java))
+            finish()
+        }
+
+        findViewById<ImageButton>(R.id.navbar_button_wishlist).setOnClickListener {
+            startActivity(Intent(applicationContext, WishlistActivity::class.java))
+            finish()
+        }
     }
 
     private fun getGameReviews(id: String) {

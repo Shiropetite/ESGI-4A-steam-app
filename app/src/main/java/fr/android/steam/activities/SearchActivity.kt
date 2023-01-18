@@ -1,12 +1,14 @@
 package fr.android.steam.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -33,9 +35,7 @@ class SearchActivity : AppCompatActivity(), CoroutineScope {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        supportActionBar?.setCustomView(R.layout.action_bar_return)
-        supportActionBar?.setDisplayShowCustomEnabled(true)
-        findViewById<TextView>(R.id.navbar_title).text = "Recherche"
+        initNavbar()
 
         recyclerView = findViewById(R.id.search_results)
         recyclerView.layoutManager = LinearLayoutManager(this@SearchActivity)
@@ -66,6 +66,27 @@ class SearchActivity : AppCompatActivity(), CoroutineScope {
             }
             false
         })
+    }
+
+    private fun initNavbar() {
+        supportActionBar?.setCustomView(R.layout.action_bar_return)
+        supportActionBar?.setDisplayShowCustomEnabled(true)
+        findViewById<TextView>(R.id.navbar_title).text = getString(R.string.search)
+
+        findViewById<ImageButton>(R.id.navbar_button_back).setOnClickListener {
+            startActivity(Intent(applicationContext, HomeActivity::class.java))
+            finish()
+        }
+
+        findViewById<ImageButton>(R.id.navbar_button_like).setOnClickListener {
+            startActivity(Intent(applicationContext, LikelistActivity::class.java))
+            finish()
+        }
+
+        findViewById<ImageButton>(R.id.navbar_button_wishlist).setOnClickListener {
+            startActivity(Intent(applicationContext, WishlistActivity::class.java))
+            finish()
+        }
     }
 
     private fun findByName(name: String) {

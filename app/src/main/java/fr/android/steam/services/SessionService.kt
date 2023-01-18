@@ -1,12 +1,17 @@
 package fr.android.steam.services
 
-import android.app.Service
-import android.content.Intent
-import android.os.IBinder
+import fr.android.steam.models.ApplicationUser
 
-class SessionService : Service() {
+class SessionService {
+    companion object {
+        private lateinit var currentUser: ApplicationUser
 
-    override fun onBind(intent: Intent): IBinder {
-        TODO("Return the communication channel to the service.")
+        fun setCurrentUser(currentUser: ApplicationUser) {
+            this.currentUser = currentUser;
+        }
+
+        fun getCurrentUser(): ApplicationUser {
+            return this.currentUser
+        }
     }
 }

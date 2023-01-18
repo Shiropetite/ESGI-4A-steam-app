@@ -9,12 +9,12 @@ import androidx.appcompat.widget.AppCompatButton
 import fr.android.steam.R
 import fr.android.steam.models.ApplicationUser
 import fr.android.steam.services.GameService
+import fr.android.steam.services.SessionService
 import fr.android.steam.services.SignUpService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import org.json.JSONArray
 import kotlin.coroutines.CoroutineContext
 
 class SignUpActivity : AppCompatActivity(), CoroutineScope {
@@ -70,9 +70,8 @@ class SignUpActivity : AppCompatActivity(), CoroutineScope {
                     GameService(this@SignUpActivity).parseJSONGames(data.getJSONArray("wishlistedGames")),
                 )
 
-                val bundle = Bundle()
-                bundle.putParcelable("_user", user)
-                intent.putExtra("_bundle", bundle)
+                SessionService.setCurrentUser(user)
+
                 startActivity(Intent(applicationContext, HomeActivity::class.java))
                 finish()
             }

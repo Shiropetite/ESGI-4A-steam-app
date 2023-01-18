@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
-import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,12 +11,12 @@ import androidx.appcompat.widget.AppCompatButton
 import fr.android.steam.R
 import fr.android.steam.models.ApplicationUser
 import fr.android.steam.services.GameService
+import fr.android.steam.services.SessionService
 import fr.android.steam.services.SignInService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import org.json.JSONArray
 import kotlin.coroutines.CoroutineContext
 
 
@@ -70,13 +69,9 @@ class SignInActivity : AppCompatActivity(), CoroutineScope {
                     GameService(this@SignInActivity).parseJSONGames(data.getJSONArray("likedGames")),
                     GameService(this@SignInActivity).parseJSONGames(data.getJSONArray("wishlistedGames")),
                 )
-                Log.d("#######################", user.toString())
 
-                val bundle = Bundle()
-                bundle.putParcelable("_user", user)
-                val i = Intent(applicationContext, HomeActivity::class.java)
-                i.putExtra("_bundle", bundle)
-                startActivity(i)
+                SessionService.setCurrentUser(user);
+                startActivity(Intent(applicationContext, HomeActivity::class.java))
                 finish()
             }
         }

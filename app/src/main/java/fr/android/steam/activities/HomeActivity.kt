@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import fr.android.steam.adapters.GameAdapter
 import fr.android.steam.R
-import fr.android.steam.models.ApplicationUser
 import fr.android.steam.services.GameService
+import fr.android.steam.services.SessionService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -35,11 +35,9 @@ class HomeActivity : AppCompatActivity(), CoroutineScope {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        supportActionBar?.setCustomView(R.layout.action_bar_home)
-        supportActionBar?.setDisplayShowCustomEnabled(true)
+        initNavbar()
 
-        val bundle = intent.getBundleExtra("_bundle")
-        val user = bundle?.getParcelable("_user") as ApplicationUser?
+        val user = SessionService.getCurrentUser()
 
         recyclerView = findViewById(R.id.home_topsales_list)
         recyclerView.layoutManager = LinearLayoutManager(this@HomeActivity)
@@ -52,35 +50,20 @@ class HomeActivity : AppCompatActivity(), CoroutineScope {
             startActivity(Intent(applicationContext, SearchActivity::class.java))
             finish()
         }
+    }
+
+    private fun initNavbar() {
+        supportActionBar?.setCustomView(R.layout.action_bar_home)
+        supportActionBar?.setDisplayShowCustomEnabled(true)
 
         findViewById<ImageButton>(R.id.navbar_button_like).setOnClickListener {
-            if (user?.likedGames?.isEmpty() == true) {
-                startActivity(Intent(applicationContext, EmptyLikelistActivity::class.java))
-                finish()
-            }
-            else {
-                val bundle = Bundle()
-                bundle.putParcelable("_user", user)
-                val i = Intent(applicationContext, LikelistActivity::class.java)
-                i.putExtra("_bundle", bundle)
-                startActivity(i)
-                finish()
-            }
+            startActivity(Intent(applicationContext, LikelistActivity::class.java))
+            finish()
         }
 
         findViewById<ImageButton>(R.id.navbar_button_wishlist).setOnClickListener {
-            if (user?.wishListedGames?.isEmpty() == true) {
-                startActivity(Intent(applicationContext, EmptyWishlistActivity::class.java))
-                finish()
-            }
-            else {
-                val bundle = Bundle()
-                bundle.putParcelable("_user", user)
-                val i = Intent(applicationContext, WishlistActivity::class.java)
-                i.putExtra("_bundle", bundle)
-                startActivity(i)
-                finish()
-            }
+            startActivity(Intent(applicationContext, WishlistActivity::class.java))
+            finish()
         }
     }
 
