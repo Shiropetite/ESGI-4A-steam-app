@@ -51,7 +51,7 @@ class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
 
         val wishButton = findViewById<ImageButton>(R.id.game_details_button_wishlist)
 
-        if(user.wishListedGames?.contains(this.currentGame) == true) { wishButton.setImageResource(R.drawable.wish_full); }
+        if(user.wishlistedGames?.contains(this.currentGame) == true) { wishButton.setImageResource(R.drawable.wish_full); }
 
         findViewById<TextView>(R.id.game_details_name).text = this.currentGame?.name
         findViewById<TextView>(R.id.game_details_publisher).text = this.currentGame?.publisher
@@ -76,10 +76,6 @@ class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
         val adapter = GameReviewAdapter(listOf())
         recyclerView.adapter = adapter
 
-        findViewById<ImageButton>(R.id.game_details_button_wishlist).setOnClickListener {
-
-        }
-
         val descriptionBtn = findViewById<AppCompatButton>(R.id.game_details_goto_reviews)
         val reviewBtn = findViewById<AppCompatButton>(R.id.game_details_description)
 
@@ -99,7 +95,8 @@ class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
 
         getGameReviews(this.currentGame?.id.orEmpty())
 
-        likedButton()
+        initLikButton()
+        initWishButton()
     }
 
     private fun initNavbar() {
@@ -123,7 +120,7 @@ class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
         }
     }
 
-    private fun likedButton() {
+    private fun initLikButton() {
         val user = SessionService.getCurrentUser()
         val likeButton = findViewById<ImageButton>(R.id.game_details_button_like)
 
@@ -161,6 +158,50 @@ class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
                     else {
                         likeButton.setImageResource(R.drawable.like_full);
                         user.likedGames = GameService(this@GameDetailsActivity).parseJSONGames(data.getJSONArray("likedGames"))
+                    }
+                }
+            }
+        }
+    }
+
+    private fun initWishButton() {
+        val user = SessionService.getCurrentUser()
+        val wishButton = findViewById<ImageButton>(R.id.game_details_button_wishlist)
+
+        if(user.wishlistedGames?.contains(this.currentGame) == true) {
+            wishButton.setImageResource(R.drawable.wish_full);
+        }
+
+        wishButton.setOnClickListener {
+            job = Job()
+            launch {
+                // Si déjà wish
+                if(user.wishlistedGames?.contains(currentGame) == true) {
+                    val data = UserService(this@GameDetailsActivity).unwish(user.id!!, currentGame.id!!)
+
+                    if (data.has("error")) {
+                        Toast.makeText(
+                            this@GameDetailsActivity,
+                            "Une erreur est survenue",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                    else {
+                        wishButton.setImageResource(R.drawable.wishlist);
+                        user.wishlistedGames = GameService(this@GameDetailsActivity).parseJSONGames(data.getJSONArray("wishlistedGames"))
+                    }
+                } // Si pas wish
+                else {
+                    val data = UserService(this@GameDetailsActivity).wish(user.id!!, currentGame.id!!)
+
+                    if (data.has("error")) {
+                        Toast.makeText(
+                            this@GameDetailsActivity,
+                            "Une erreur est survenue",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                    else {
+                        wishButton.setImageResource(R.drawable.wish_full);
+                        user.wishlistedGames = GameService(this@GameDetailsActivity).parseJSONGames(data.getJSONArray("wishlistedGames"))
                     }
                 }
             }

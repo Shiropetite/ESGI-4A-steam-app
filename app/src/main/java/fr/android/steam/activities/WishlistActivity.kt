@@ -25,13 +25,13 @@ class WishlistActivity : AppCompatActivity() {
 
         initNavbar()
 
-        if (user?.wishListedGames?.isEmpty() == true) {
+        if (user?.wishlistedGames?.isEmpty() == true) {
             setContentView(R.layout.activity_empty_wishlist)
         }
         else {
             recyclerView = findViewById(R.id.wishlist_list)
             recyclerView.layoutManager = LinearLayoutManager(this@WishlistActivity)
-            val adapter = user?.wishListedGames?.let { GameAdapter(it) }
+            val adapter = user?.wishlistedGames?.let { GameAdapter(it) }
             recyclerView.adapter = adapter
         }
     }

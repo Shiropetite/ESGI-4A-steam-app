@@ -9,7 +9,7 @@ data class ApplicationUser(
     val email: String?,
     val password: String?,
     var likedGames: List<Game>?,
-    val wishListedGames: List<Game>?
+    var wishlistedGames: List<Game>?
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
@@ -27,7 +27,7 @@ data class ApplicationUser(
         parcel.writeString(email)
         parcel.writeString(password)
         parcel.writeTypedList(likedGames)
-        parcel.writeTypedList(wishListedGames)
+        parcel.writeTypedList(wishlistedGames)
     }
 
     override fun describeContents(): Int {

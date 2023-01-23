@@ -59,4 +59,44 @@ class UserService(val context: Context) : Service() {
         queue.add(jsonRequest)
     }
 
+    suspend fun wish(idUser: String, idGame: String): JSONObject = suspendCoroutine { cont ->
+        // Instantiate the RequestQueue.
+        val queue = Volley.newRequestQueue(context)
+        val url = "http://10.0.2.2:3000/users/$idUser/add-wishlist/$idGame"
+
+        // Request a string response from the provided URL.
+        val jsonRequest = JsonObjectRequest(
+            Request.Method.PUT, url, null,
+            { response ->
+                cont.resume(response)
+            },
+            {
+                cont.resume(JSONObject().put("error", "error_occurred"))
+            }
+        )
+
+        // Add the request to the RequestQueue.
+        queue.add(jsonRequest)
+    }
+
+    suspend fun unwish(idUser: String, idGame: String): JSONObject = suspendCoroutine { cont ->
+        // Instantiate the RequestQueue.
+        val queue = Volley.newRequestQueue(context)
+        val url = "http://10.0.2.2:3000/users/$idUser/remove-wishlist/$idGame"
+
+        // Request a string response from the provided URL.
+        val jsonRequest = JsonObjectRequest(
+            Request.Method.PUT, url, null,
+            { response ->
+                cont.resume(response)
+            },
+            {
+                cont.resume(JSONObject().put("error", "error_occurred"))
+            }
+        )
+
+        // Add the request to the RequestQueue.
+        queue.add(jsonRequest)
+    }
+
 }
