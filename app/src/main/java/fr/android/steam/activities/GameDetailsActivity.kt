@@ -15,9 +15,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import fr.android.steam.R
 import fr.android.steam.adapters.GameReviewAdapter
+import fr.android.steam.models.ApplicationUser
 import fr.android.steam.models.Game
 import fr.android.steam.services.GameReviewService
+import fr.android.steam.services.GameService
 import fr.android.steam.services.SessionService
+import fr.android.steam.services.UserService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -30,6 +33,7 @@ class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
     override val coroutineContext: CoroutineContext get() = job + Dispatchers.Main
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var currentGame: Game
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,38 +44,41 @@ class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
 
         // Get game
         val bundle = intent.getBundleExtra("_bundle")
-        val game = bundle?.getParcelable("_game") as Game?
+        this.currentGame = bundle?.getParcelable<Game>("_game")!!
 
         // Get user
         val user = SessionService.getCurrentUser()
-        val likeButton = findViewById<ImageButton>(R.id.game_details_button_like)
+
         val wishButton = findViewById<ImageButton>(R.id.game_details_button_wishlist)
 
-        if(user.likedGames?.contains(game) == true) { likeButton.setImageResource(R.drawable.like_full); }
-        if(user.wishListedGames?.contains(game) == true) { wishButton.setImageResource(R.drawable.wish_full); }
+        if(user.wishListedGames?.contains(this.currentGame) == true) { wishButton.setImageResource(R.drawable.wish_full); }
 
-        findViewById<TextView>(R.id.game_details_name).text = game?.name
-        findViewById<TextView>(R.id.game_details_publisher).text = game?.publisher
-        findViewById<TextView>(R.id.game_details_price).text = game?.price
+        findViewById<TextView>(R.id.game_details_name).text = this.currentGame?.name
+        findViewById<TextView>(R.id.game_details_publisher).text = this.currentGame?.publisher
+        findViewById<TextView>(R.id.game_details_price).text = this.currentGame?.price
 
         Glide.with(applicationContext)
-            .load(game?.mini_image)
+            .load(this.currentGame?.mini_image)
             .centerCrop()
             .into(findViewById(R.id.game_details_img))
 
         Glide.with(applicationContext)
-            .load(game?.cover_image)
+            .load(this.currentGame?.cover_image)
             .centerCrop()
             .into(findViewById(R.id.game_details_cover_img))
 
         val description = findViewById<TextView>(R.id.game_details_text)
-        description.text = game?.description
+        description.text = this.currentGame.description
 
         recyclerView = findViewById(R.id.game_reviews_list)
         recyclerView.visibility = View.INVISIBLE
         recyclerView.layoutManager = LinearLayoutManager(this@GameDetailsActivity)
         val adapter = GameReviewAdapter(listOf())
         recyclerView.adapter = adapter
+
+        findViewById<ImageButton>(R.id.game_details_button_wishlist).setOnClickListener {
+
+        }
 
         val descriptionBtn = findViewById<AppCompatButton>(R.id.game_details_goto_reviews)
         val reviewBtn = findViewById<AppCompatButton>(R.id.game_details_description)
@@ -90,7 +97,9 @@ class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
             reviewBtn.setBackgroundResource(R.drawable.primary_button)
         }
 
-        getGameReviews(game?.id.orEmpty())
+        getGameReviews(this.currentGame?.id.orEmpty())
+
+        likedButton()
     }
 
     private fun initNavbar() {
@@ -114,11 +123,54 @@ class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
         }
     }
 
+    private fun likedButton() {
+        val user = SessionService.getCurrentUser()
+        val likeButton = findViewById<ImageButton>(R.id.game_details_button_like)
+
+        if(user.likedGames?.contains(this.currentGame) == true) {
+            likeButton.setImageResource(R.drawable.like_full);
+        }
+
+        likeButton.setOnClickListener {
+            job = Job()
+            launch {
+                // Si déjà liker
+                if(user.likedGames?.contains(currentGame) == true) {
+                    val data = UserService(this@GameDetailsActivity).unlike(user.id!!, currentGame.id!!)
+
+                    if (data.has("error")) {
+                        Toast.makeText(
+                            this@GameDetailsActivity,
+                            "Une erreur est survenue",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                    else {
+                        likeButton.setImageResource(R.drawable.like);
+                        user.likedGames = GameService(this@GameDetailsActivity).parseJSONGames(data.getJSONArray("likedGames"))
+                    }
+                } // Si pas liker
+                else {
+                    val data = UserService(this@GameDetailsActivity).like(user.id!!, currentGame.id!!)
+
+                    if (data.has("error")) {
+                        Toast.makeText(
+                            this@GameDetailsActivity,
+                            "Une erreur est survenue",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                    else {
+                        likeButton.setImageResource(R.drawable.like_full);
+                        user.likedGames = GameService(this@GameDetailsActivity).parseJSONGames(data.getJSONArray("likedGames"))
+                    }
+                }
+            }
+        }
+    }
+
     private fun getGameReviews(id: String) {
         job = Job()
         launch {
             val data = GameReviewService(this@GameDetailsActivity).getGameReviews(id)
-            Log.d("########", "Coucou")
 
             if (data.has("error")) {
                 Toast.makeText(

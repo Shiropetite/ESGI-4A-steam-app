@@ -4,14 +4,16 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class ApplicationUser(
+    val id: String?,
     val username: String?,
     val email: String?,
     val password: String?,
-    val likedGames: List<Game>?,
+    var likedGames: List<Game>?,
     val wishListedGames: List<Game>?
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),

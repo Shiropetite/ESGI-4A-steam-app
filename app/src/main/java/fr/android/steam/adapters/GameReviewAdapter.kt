@@ -24,7 +24,7 @@ class GameReviewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val review = reviews[position]
 
-        holder.name.text = review.name
+        holder.name.text = review.username
         holder.review.text = review.text
 
         if (!review.good_grade) {

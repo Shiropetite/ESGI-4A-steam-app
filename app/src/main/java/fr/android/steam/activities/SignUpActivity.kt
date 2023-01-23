@@ -63,6 +63,7 @@ class SignUpActivity : AppCompatActivity(), CoroutineScope {
             }
             else {
                 val user = ApplicationUser(
+                    data.getString("id"),
                     data.getString("name"),
                     data.getString("email"),
                     data.getString("password"),

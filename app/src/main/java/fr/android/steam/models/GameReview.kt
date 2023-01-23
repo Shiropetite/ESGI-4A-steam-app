@@ -6,7 +6,7 @@ import android.os.Parcelable
 import androidx.annotation.RequiresApi
 
 data class GameReview(
-    val name: String?,
+    val username: String?,
     val good_grade: Boolean,
     val text: String?
 ) : Parcelable {
@@ -21,7 +21,7 @@ data class GameReview(
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
+        parcel.writeString(username)
         parcel.writeBoolean(good_grade)
         parcel.writeString(text)
     }
