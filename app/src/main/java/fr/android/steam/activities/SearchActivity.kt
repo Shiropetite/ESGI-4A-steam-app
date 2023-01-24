@@ -3,8 +3,6 @@ package fr.android.steam.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -16,7 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.android.steam.adapters.GameAdapter
 import fr.android.steam.R
-import fr.android.steam.services.GameService
+import fr.android.steam.services.GameParser
+import fr.android.steam.services.RequestFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -92,7 +91,10 @@ class SearchActivity : AppCompatActivity(), CoroutineScope {
     private fun findByName(name: String) {
         job = Job()
         launch {
-            val data = GameService(this@SearchActivity).findByName(name)
+            val data = RequestFactory.generateGetRequest(
+                this@SearchActivity,
+                "http://10.0.2.2:3000/games/search?name=$name"
+            )
 
             if (data.has("error")) {
                 Toast.makeText(
@@ -102,8 +104,11 @@ class SearchActivity : AppCompatActivity(), CoroutineScope {
             }
             else {
                 val count = data.getInt("count")
-                val games = GameService(this@SearchActivity).parseJSONGames(data.getJSONArray("games"))
-                findViewById<TextView>(R.id.search_results_title).text = "Nombre de résultats : $count"
+                val games = GameParser.parseJSONGames(data.getJSONArray("games"))
+                findViewById<TextView>(R.id.search_results_title).text = buildString {
+                    append(getString(R.string.number_of_results))
+                    append(count)
+                }
                 val adapter = GameAdapter(games)
                 recyclerView.adapter = adapter
             }

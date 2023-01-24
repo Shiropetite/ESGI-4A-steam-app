@@ -8,13 +8,14 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import fr.android.steam.R
 import fr.android.steam.models.ApplicationUser
-import fr.android.steam.services.GameService
-import fr.android.steam.services.SessionService
-import fr.android.steam.services.SignUpService
+import fr.android.steam.services.GameParser
+import fr.android.steam.services.SessionStorage
+import fr.android.steam.services.RequestFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import kotlin.coroutines.CoroutineContext
 
 class SignUpActivity : AppCompatActivity(), CoroutineScope {
@@ -48,12 +49,21 @@ class SignUpActivity : AppCompatActivity(), CoroutineScope {
                 this@SignUpActivity,
                 "Le mot de passe est différent de sa vérification",
                 Toast.LENGTH_SHORT).show()
-            return;
+            return
         }
 
         job = Job()
         launch {
-            val data = SignUpService(this@SignUpActivity).signUp(name, email, password)
+            val body = JSONObject()
+            body.put("name", name)
+            body.put("email", email)
+            body.put("password", password)
+
+            val data = RequestFactory.generatePostRequest(
+                this@SignUpActivity,
+                "http://10.0.2.2:3000/users/signup",
+                body
+            )
 
             if (data.has("error")) {
                 Toast.makeText(
@@ -67,11 +77,11 @@ class SignUpActivity : AppCompatActivity(), CoroutineScope {
                     data.getString("name"),
                     data.getString("email"),
                     data.getString("password"),
-                    GameService(this@SignUpActivity).parseJSONGames(data.getJSONArray("likedGames")),
-                    GameService(this@SignUpActivity).parseJSONGames(data.getJSONArray("wishlistedGames")),
+                    GameParser.parseJSONGames(data.getJSONArray("likedGames")),
+                    GameParser.parseJSONGames(data.getJSONArray("wishlistedGames")),
                 )
 
-                SessionService.setCurrentUser(user)
+                SessionStorage.setCurrentUser(user)
 
                 startActivity(Intent(applicationContext, HomeActivity::class.java))
                 finish()

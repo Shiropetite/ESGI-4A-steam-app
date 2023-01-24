@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.android.steam.adapters.GameAdapter
 import fr.android.steam.R
-import fr.android.steam.services.SessionService
+import fr.android.steam.services.SessionStorage
 
 class LikelistActivity : AppCompatActivity() {
 
@@ -21,17 +21,17 @@ class LikelistActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_likelist)
 
-        val user = SessionService.getCurrentUser()
+        val user = SessionStorage.getCurrentUser()
 
         initNavbar()
 
-        if (user?.likedGames?.isEmpty() == true) {
+        if (user.likedGames?.isEmpty() == true) {
             setContentView(R.layout.activity_empty_likelist)
         }
         else {
             recyclerView = findViewById(R.id.likelist_list)
             recyclerView.layoutManager = LinearLayoutManager(this@LikelistActivity)
-            val adapter = user?.likedGames?.let { GameAdapter(it) }
+            val adapter = user.likedGames?.let { GameAdapter(it) }
             recyclerView.adapter = adapter
         }
     }

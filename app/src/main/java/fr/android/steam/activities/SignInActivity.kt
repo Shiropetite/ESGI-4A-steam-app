@@ -10,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import fr.android.steam.R
 import fr.android.steam.models.ApplicationUser
-import fr.android.steam.services.GameService
-import fr.android.steam.services.SessionService
-import fr.android.steam.services.SignInService
+import fr.android.steam.services.GameParser
+import fr.android.steam.services.SessionStorage
+import fr.android.steam.services.RequestFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -36,7 +36,7 @@ class SignInActivity : AppCompatActivity(), CoroutineScope {
         findViewById<AppCompatButton>(R.id.signin_confirm_btn).setOnClickListener {
             val email = findViewById<TextView>(R.id.signin_email_input).text.toString()
             val password = findViewById<TextView>(R.id.signin_password_input).text.toString()
-            signIn(email, password);
+            signIn(email, password)
         }
 
         findViewById<AppCompatButton>(R.id.signin_goto_signup_btn).setOnClickListener {
@@ -53,7 +53,10 @@ class SignInActivity : AppCompatActivity(), CoroutineScope {
     private fun signIn(email: String, password: String) {
         job = Job()
         launch {
-            val data = SignInService(this@SignInActivity).signIn(email, password)
+            val data = RequestFactory.generateGetRequest(
+                this@SignInActivity,
+                "http://10.0.2.2:3000/users/signin?email=$email&pwd=$password"
+            )
 
             if (data.has("error")) {
                 Toast.makeText(
@@ -67,11 +70,11 @@ class SignInActivity : AppCompatActivity(), CoroutineScope {
                     data.getString("name"),
                     data.getString("email"),
                     data.getString("password"),
-                    GameService(this@SignInActivity).parseJSONGames(data.getJSONArray("likedGames")),
-                    GameService(this@SignInActivity).parseJSONGames(data.getJSONArray("wishlistedGames")),
+                    GameParser.parseJSONGames(data.getJSONArray("likedGames")),
+                    GameParser.parseJSONGames(data.getJSONArray("wishlistedGames")),
                 )
 
-                SessionService.setCurrentUser(user);
+                SessionStorage.setCurrentUser(user)
                 startActivity(Intent(applicationContext, HomeActivity::class.java))
                 finish()
             }

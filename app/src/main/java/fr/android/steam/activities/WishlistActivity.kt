@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.android.steam.adapters.GameAdapter
 import fr.android.steam.R
-import fr.android.steam.services.SessionService
+import fr.android.steam.services.SessionStorage
 
 class WishlistActivity : AppCompatActivity() {
 
@@ -21,17 +21,17 @@ class WishlistActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wishlist)
 
-        val user = SessionService.getCurrentUser()
+        val user = SessionStorage.getCurrentUser()
 
         initNavbar()
 
-        if (user?.wishlistedGames?.isEmpty() == true) {
+        if (user.wishlistedGames?.isEmpty() == true) {
             setContentView(R.layout.activity_empty_wishlist)
         }
         else {
             recyclerView = findViewById(R.id.wishlist_list)
             recyclerView.layoutManager = LinearLayoutManager(this@WishlistActivity)
-            val adapter = user?.wishlistedGames?.let { GameAdapter(it) }
+            val adapter = user.wishlistedGames?.let { GameAdapter(it) }
             recyclerView.adapter = adapter
         }
     }
