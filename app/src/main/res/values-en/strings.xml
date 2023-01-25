@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">steam</string>
+    <string name="forget_password_underline"><u>Forgot password</u></string>
+    <string name="forget_password">Forgot password</string>
+    <string name="welcome_title">Welcome !</string>
+    <string name="welcome_description">Please login or create a new account to access the app.</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_up_title">Sign up</string>
+    <string name="sign_up_description">Please provide these information so that your game lists can be saved</string>
+    <string name="username">Username</string>
+    <string name="password_verification">Password verification</string>
+    <string name="sign_up_button">Sign up</string>
+    <string name="already_have_account">I already have an account</string>
+    <string name="forget_password_description">Please enter your email to reset your password</string>
+    <string name="send_email">Resend my password</string>
+    <string name="return_to_sign_in">Back to sign in</string>
+    <string name="home">Home</string>
+    <string name="search_game">Find a game…</string>
+    <string name="more_about">More details</string>
+    <string name="best_sales"><u>Best sales</u></string>
+    <string name="game_name">Name</string>
+    <string name="game_description">Description</string>
+    <string name="editor_name">Editor</string>
+    <string name="game_price">Price: 10,00€</string>
+    <string name="no_like_title">Your likelist is empty !</string>
+    <string name="no_like_description">Tap on the heart when viewing a game.</string>
+    <string name="no_wish_title">Your wishlist is empty</string>
+    <string name="no_wish_description">Tap on the star when viewing a game to add it to the wishlist.</string>
+    <string name="search_nb_result"><u>Number of results: 42</u></string>
+    <string name="description">Description</string>
+    <string name="reviews">Review</string>
+    <string name="title_game_detail">Game\'s details</string>
+    <string name="my_likes">My likelist</string>
+    <string name="search">Search</string>
+    <string name="wishlist">My wishlist</string>
+    <string name="number_of_results">"Number of results : "</string>
+</resources>

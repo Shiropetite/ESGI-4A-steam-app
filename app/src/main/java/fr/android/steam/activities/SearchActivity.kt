@@ -3,6 +3,8 @@ package fr.android.steam.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -20,6 +22,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 class SearchActivity : AppCompatActivity(), CoroutineScope {
@@ -41,8 +44,9 @@ class SearchActivity : AppCompatActivity(), CoroutineScope {
         val adapter = GameAdapter(listOf())
         recyclerView.adapter = adapter
 
-        /* recherche avec fire semi-temps réel
-         * risque de blacklist de l'api steam
+        // recherche avec fire semi-temps réel
+        // risque de blacklist par l'api steam
+        /*
         findViewById<EditText>(R.id.search_searchbar).addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) { }
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
@@ -93,7 +97,7 @@ class SearchActivity : AppCompatActivity(), CoroutineScope {
         launch {
             val data = RequestFactory.generateGetRequest(
                 this@SearchActivity,
-                "http://10.0.2.2:3000/games/search?name=$name"
+                "http://10.0.2.2:3000/games/search?name=$name&lang=${Locale.getDefault().displayLanguage.lowercase()}"
             )
 
             if (data.has("error")) {

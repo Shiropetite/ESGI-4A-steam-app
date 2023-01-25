@@ -26,16 +26,16 @@
     <string name="editor_name">Nom de l\'éditeur</string>
     <string name="game_price">Prix: 10,00 €</string>
     <string name="no_like_title">Votre liste de like est vide !</string>
-    <string name="no_like_description">Cliquez sur le coeur lorsque vous consultez un jeu l\'ajouter.</string>
-    <string name="no_wish_title">Votre wishlist est vide !</string>
-    <string name="no_wish_description">Cliquez sur l\'étoile lorsque vous consultez un jeu l\'ajouter.</string>
+    <string name="no_like_description">Cliquez sur le coeur lorsque vous consultez un jeu pour l\'ajouter à vos j\'aime.</string>
+    <string name="no_wish_title">Votre liste de souhait est vide !</string>
+    <string name="no_wish_description">Cliquez sur l\'étoile lorsque vous consultez un jeu pour l\'ajouter à vos souhaits.</string>
     <string name="search_nb_result"><u>Nombre de résultats : 42</u></string>
-    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia ornare tortor sodales hendrerit. Phasellus enim diam, vestibulum nec augue sed, laoreet maximus orci. Praesent purus neque, lobortis at molestie vitae, blandit et enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo risus, sagittis ut mi vitae, luctus bibendum lectus. Nunc porttitor velit sapien, eget interdum dolor interdum et. Donec tortor risus, malesuada quis aliquet eget, facilisis sed ante. Etiam feugiat in nibh eu accumsan.</string>
+    <string name="lorem" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia ornare tortor sodales hendrerit. Phasellus enim diam, vestibulum nec augue sed, laoreet maximus orci. Praesent purus neque, lobortis at molestie vitae, blandit et enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo risus, sagittis ut mi vitae, luctus bibendum lectus. Nunc porttitor velit sapien, eget interdum dolor interdum et. Donec tortor risus, malesuada quis aliquet eget, facilisis sed ante. Etiam feugiat in nibh eu accumsan.</string>
     <string name="description">Description</string>
     <string name="reviews">Avis</string>
     <string name="title_game_detail">Détail du jeu</string>
-    <string name="my_likes">Mes likes</string>
+    <string name="my_likes">Mes j\'aime</string>
     <string name="search">Recherche</string>
     <string name="wishlist">Ma liste de souhaits</string>
-    <string name="number_of_results">\"Nombre de résultats : \"</string>
+    <string name="number_of_results">"Nombre de résultats : "</string>
 </resources>

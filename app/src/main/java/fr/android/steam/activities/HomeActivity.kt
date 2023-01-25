@@ -20,6 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 
@@ -70,7 +71,7 @@ class HomeActivity : AppCompatActivity(), CoroutineScope {
         launch {
             val data = RequestFactory.generateGetRequest(
                 this@HomeActivity,
-                "http://10.0.2.2:3000/games/top"
+                "http://10.0.2.2:3000/games/top?lang=${Locale.getDefault().displayLanguage.lowercase()}"
             )
 
             if (data.has("error")) {
@@ -107,7 +108,6 @@ class HomeActivity : AppCompatActivity(), CoroutineScope {
                     startActivity(i)
                     finish()
                 }
-
             }
         }
     }
