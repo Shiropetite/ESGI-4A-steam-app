@@ -29,7 +29,7 @@
     <string name="no_like_description">Cliquez sur le coeur lorsque vous consultez un jeu pour l\'ajouter à vos j\'aime.</string>
     <string name="no_wish_title">Votre liste de souhait est vide !</string>
     <string name="no_wish_description">Cliquez sur l\'étoile lorsque vous consultez un jeu pour l\'ajouter à vos souhaits.</string>
-    <string name="search_nb_result"><u>Nombre de résultats : 42</u></string>
+    <string name="search_nb_result"><u>Nombre de résultats : </u></string>
     <string name="lorem" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia ornare tortor sodales hendrerit. Phasellus enim diam, vestibulum nec augue sed, laoreet maximus orci. Praesent purus neque, lobortis at molestie vitae, blandit et enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo risus, sagittis ut mi vitae, luctus bibendum lectus. Nunc porttitor velit sapien, eget interdum dolor interdum et. Donec tortor risus, malesuada quis aliquet eget, facilisis sed ante. Etiam feugiat in nibh eu accumsan.</string>
     <string name="description">Description</string>
     <string name="reviews">Avis</string>
@@ -38,4 +38,13 @@
     <string name="search">Recherche</string>
     <string name="wishlist">Ma liste de souhaits</string>
     <string name="number_of_results">"Nombre de résultats : "</string>
+    <string name="error_unlike">Le jeu n\'a pas pu être enlevé de votre liste de j\'aime. Veuillez réessayer.</string>
+    <string name="error_like">Le jeu n\'a pas pu être ajouté à votre liste de j\'aime. Veuillez réessayer.</string>
+    <string name="error_unwish">Le jeu n\'a pas pu être enlevé de votre liste de souhait. Veuillez réessayer.</string>
+    <string name="error_wish">Le jeu n\'a pas pu être ajouté à votre liste de souhait. Veuillez réessayer.</string>
+    <string name="error_game_detail">Le jeu n\'a pas pu être récupéré correctement. Veuillez réessayer.</string>
+    <string name="error_top_games">La liste de jeu n\'a pas pu être récupéré.</string>
+    <string name="error_search_games">Les jeux n\'ont pas pu être récupéré correctement. Veuillez réessayer.</string>
+    <string name="error_sign_in">Les informations de connexion sont incorrect. Veuillez réessayer.</string>
+    <string name="error_sign_up">Cette adresse email est déjà utilisée</string>
 </resources>

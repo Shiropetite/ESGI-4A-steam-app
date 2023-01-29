@@ -61,7 +61,7 @@ class SignInActivity : AppCompatActivity(), CoroutineScope {
             if (data.has("error")) {
                 Toast.makeText(
                     this@SignInActivity,
-                    "Les informations de connexion sont incorrect. Veuillez réessayer",
+                    getString(R.string.error_sign_in),
                     Toast.LENGTH_SHORT).show()
             }
             else {

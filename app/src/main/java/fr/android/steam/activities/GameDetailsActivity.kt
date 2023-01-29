@@ -136,7 +136,7 @@ class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
                     if (data.has("error")) {
                         Toast.makeText(
                             this@GameDetailsActivity,
-                            "Une erreur est survenue",
+                            getString(R.string.error_unlike),
                             Toast.LENGTH_SHORT).show()
                     }
                     else {
@@ -153,7 +153,7 @@ class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
                     if (data.has("error")) {
                         Toast.makeText(
                             this@GameDetailsActivity,
-                            "Une erreur est survenue",
+                            getString(R.string.error_like),
                             Toast.LENGTH_SHORT).show()
                     }
                     else {
@@ -186,7 +186,7 @@ class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
                     if (data.has("error")) {
                         Toast.makeText(
                             this@GameDetailsActivity,
-                            "Une erreur est survenue",
+                            getString(R.string.error_unwish),
                             Toast.LENGTH_SHORT).show()
                     }
                     else {
@@ -203,7 +203,7 @@ class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
                     if (data.has("error")) {
                         Toast.makeText(
                             this@GameDetailsActivity,
-                            "Une erreur est survenue",
+                            getString(R.string.error_wish),
                             Toast.LENGTH_SHORT).show()
                     }
                     else {
@@ -226,7 +226,7 @@ class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
             if (data.has("error")) {
                 Toast.makeText(
                     this@GameDetailsActivity,
-                    "Une erreur est survenue",
+                    getString(R.string.error_game_detail),
                     Toast.LENGTH_SHORT).show()
             }
             else {
