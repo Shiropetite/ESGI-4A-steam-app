@@ -48,4 +48,6 @@
     <string name="error_search_games">Les jeux n\'ont pas pu être récupéré correctement. Veuillez réessayer.</string>
     <string name="error_sign_in">Les informations de connexion sont incorrect. Veuillez réessayer.</string>
     <string name="error_sign_up">Cette adresse email est déjà utilisée</string>
+    <string name="error_lost_password">Le changement de mot de passe n\'a pas pu être effectué. Veuillez réessayer.</string>
+    <string name="success_lost_password">Mot de passe changé avec succès.</string>
 </resources>

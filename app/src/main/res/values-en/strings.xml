@@ -48,4 +48,6 @@
     <string name="error_search_games">Games could not be recover correctly. Please try again.</string>
     <string name="error_sign_in">Informations received are wrong. Please try again.</string>
     <string name="error_sign_up">This email address is already used.</string>
+    <string name="error_lost_password">The password could not be updated. Please try again.</string>
+    <string name="success_lost_password">Password updated successfully.</string>
 </resources>

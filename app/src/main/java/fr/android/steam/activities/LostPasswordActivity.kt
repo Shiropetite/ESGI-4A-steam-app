@@ -52,13 +52,13 @@ class LostPasswordActivity : AppCompatActivity(), CoroutineScope {
             if (data.has("error")) {
                 Toast.makeText(
                 this@LostPasswordActivity,
-                "Le changement de mot de passe n'a pas pu être effectué. Veuillez réessayer",
+                getString(R.string.error_lost_password),
                 Toast.LENGTH_SHORT).show()
             }
             else {
                 Toast.makeText(
                 this@LostPasswordActivity,
-                "Mot de passe changé avec succès.",
+                getString(R.string.success_lost_password),
                 Toast.LENGTH_SHORT).show()
 
                 startActivity(Intent(applicationContext, SignInActivity::class.java))
