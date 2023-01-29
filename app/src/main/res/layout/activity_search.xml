@@ -17,6 +17,7 @@
         android:drawableEnd="@drawable/search"
         android:fontFamily="@font/proxima_nova"
         android:hint="@string/search_game"
+        android:autofillHints="@string/search_game"
         android:inputType="textPersonName"
         android:paddingHorizontal="12dp"
         android:paddingVertical="8dp"
@@ -41,9 +42,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_results"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_results_title" />

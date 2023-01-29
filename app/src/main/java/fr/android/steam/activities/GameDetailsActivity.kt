@@ -2,12 +2,14 @@ package fr.android.steam.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +23,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
+
 
 class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
 
@@ -63,7 +66,11 @@ class GameDetailsActivity : AppCompatActivity(), CoroutineScope {
             .into(findViewById(R.id.game_details_cover_img))
 
         val description = findViewById<TextView>(R.id.game_details_text)
-        description.text = this.currentGame.description
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            description.text = Html.fromHtml(this.currentGame.description, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            description.text = Html.fromHtml(this.currentGame.description)
+        }
 
         recyclerView = findViewById(R.id.game_reviews_list)
         recyclerView.visibility = View.INVISIBLE
