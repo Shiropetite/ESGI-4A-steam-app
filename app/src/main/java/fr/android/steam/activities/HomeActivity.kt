@@ -77,7 +77,7 @@ class HomeActivity : AppCompatActivity(), CoroutineScope {
             if (data.has("error")) {
                 Toast.makeText(
                 this@HomeActivity,
-                "Une erreur est survenue",
+                getString(R.string.error_top_games),
                 Toast.LENGTH_SHORT).show()
             }
             else {

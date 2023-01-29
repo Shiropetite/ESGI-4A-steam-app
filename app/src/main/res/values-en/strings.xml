@@ -31,7 +31,7 @@
     <string name="no_like_description">Tap on the heart when viewing a game.</string>
     <string name="no_wish_title">Your wishlist is empty</string>
     <string name="no_wish_description">Tap on the star when viewing a game to add it to the wishlist.</string>
-    <string name="search_nb_result"><u>Number of results: 42</u></string>
+    <string name="search_nb_result"><u>Number of results: </u></string>
     <string name="description">Description</string>
     <string name="reviews">Review</string>
     <string name="title_game_detail">Game\'s details</string>
@@ -39,4 +39,13 @@
     <string name="search">Search</string>
     <string name="wishlist">My wishlist</string>
     <string name="number_of_results">"Number of results : "</string>
+    <string name="error_unlike">The game could not be removed from your likelist. Please try again.</string>
+    <string name="error_like">The game could not be added to your likelist. Please try again.</string>
+    <string name="error_unwish">The game could not be removed from your wishlist. Please try again.</string>
+    <string name="error_wish">The game could not be added to your wishlist. Please try again.</string>
+    <string name="error_game_detail">The game could not be recover correctly. Please try again.</string>
+    <string name="error_top_games">The game list could not be recover correctly.</string>
+    <string name="error_search_games">Games could not be recover correctly. Please try again.</string>
+    <string name="error_sign_in">Informations received are wrong. Please try again.</string>
+    <string name="error_sign_up">This email address is already used.</string>
 </resources>

@@ -68,7 +68,7 @@ class SignUpActivity : AppCompatActivity(), CoroutineScope {
             if (data.has("error")) {
                 Toast.makeText(
                 this@SignUpActivity,
-                "Cet adresse email est déjà utilisée",
+                getString(R.string.error_sign_up),
                 Toast.LENGTH_SHORT).show()
             }
             else {

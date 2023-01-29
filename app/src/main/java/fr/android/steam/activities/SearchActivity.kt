@@ -3,8 +3,6 @@ package fr.android.steam.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -103,7 +101,7 @@ class SearchActivity : AppCompatActivity(), CoroutineScope {
             if (data.has("error")) {
                 Toast.makeText(
                     this@SearchActivity,
-                    "Une erreur est survenue",
+                    getString(R.string.error_search_games),
                     Toast.LENGTH_SHORT).show()
             }
             else {
