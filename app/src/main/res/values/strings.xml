@@ -6,6 +6,7 @@
     <string name="welcome_description">Veuillez vous connecter ou créer un nouveau compte pour utiliser l’application.</string>
     <string name="email">E-mail</string>
     <string name="password">Mot de passe</string>
+    <string name="new_password">Nouveau mot de passe</string>
     <string name="sign_in">Se connecter</string>
     <string name="sign_up">Créer un nouveau compte</string>
     <string name="sign_up_title">Inscription</string>
@@ -14,8 +15,8 @@
     <string name="password_verification">Vérification du mot de passe</string>
     <string name="sign_up_button">S\'inscrire</string>
     <string name="already_have_account">Je possède déjà un compte</string>
-    <string name="forget_password_description">Veuillez saisir votre email afin de réinitialiser votre mot de passe</string>
-    <string name="send_email">Renvoyer mon mot de passe</string>
+    <string name="forget_password_description">Veuillez saisir votre email et votre nouveau mot de passe</string>
+    <string name="change_password">Changer mon mot de passe</string>
     <string name="return_to_sign_in">Retourner sur l\'écran de connexion</string>
     <string name="home">Accueil</string>
     <string name="search_game">Rechercher un jeu…</string>

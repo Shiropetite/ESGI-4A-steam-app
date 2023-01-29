@@ -7,6 +7,7 @@
     <string name="welcome_description">Please login or create a new account to access the app.</string>
     <string name="email">E-mail</string>
     <string name="password">Password</string>
+    <string name="new_password">New password</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>
     <string name="sign_up_title">Sign up</string>
@@ -15,8 +16,8 @@
     <string name="password_verification">Password verification</string>
     <string name="sign_up_button">Sign up</string>
     <string name="already_have_account">I already have an account</string>
-    <string name="forget_password_description">Please enter your email to reset your password</string>
-    <string name="send_email">Resend my password</string>
+    <string name="forget_password_description">Please enter your email and your new password</string>
+    <string name="change_password">Change my password</string>
     <string name="return_to_sign_in">Back to sign in</string>
     <string name="home">Home</string>
     <string name="search_game">Find a game…</string>
