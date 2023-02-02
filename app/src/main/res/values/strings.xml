@@ -50,4 +50,8 @@
     <string name="error_sign_up">Cette adresse email est déjà utilisée</string>
     <string name="error_lost_password">Le changement de mot de passe n\'a pas pu être effectué. Veuillez réessayer.</string>
     <string name="success_lost_password">Mot de passe changé avec succès.</string>
+    <string name="error_password_verification">Le mot de passe est différent de sa vérification</string>
+    <string name="error_email_invalid">L\'adresse email est invalide</string>
+    <string name="error_username_empty">Veuillez indiquer votre nom d\'utilisateur</string>
+    <string name="error_password_empty">Veuillez indiquer votre mot de passe</string>
 </resources>

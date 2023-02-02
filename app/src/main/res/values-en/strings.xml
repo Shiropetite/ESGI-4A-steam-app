@@ -50,4 +50,8 @@
     <string name="error_sign_up">This email address is already used.</string>
     <string name="error_lost_password">The password could not be updated. Please try again.</string>
     <string name="success_lost_password">Password updated successfully.</string>
+    <string name="error_password_verification">The password is different from verification</string>
+    <string name="error_email_invalid">Mail is invalid</string>
+    <string name="error_username_empty">Pleaser enter your username</string>
+    <string name="error_password_empty">Please enter your password</string>
 </resources>

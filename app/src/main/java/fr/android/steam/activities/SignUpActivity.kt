@@ -16,6 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import java.util.regex.Pattern
 import kotlin.coroutines.CoroutineContext
 
 class SignUpActivity : AppCompatActivity(), CoroutineScope {
@@ -44,10 +45,62 @@ class SignUpActivity : AppCompatActivity(), CoroutineScope {
     }
 
     private fun signUp(name: String, email: String, password: String, verificationPassword: String) {
-        if (password != verificationPassword) {
+        val name_input =findViewById<TextView>(R.id.signup_username_input)
+        name_input.background = getDrawable(R.drawable.normal_input)
+        name_input.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+
+        if (name.isBlank()) {
+            name_input.background = getDrawable(R.drawable.error_input)
+            name_input.setCompoundDrawablesWithIntrinsicBounds(null, null, getDrawable(R.drawable.warning), null)
+
             Toast.makeText(
                 this@SignUpActivity,
-                "Le mot de passe est différent de sa vérification",
+                getString(R.string.error_username_empty),
+                Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val emailInput = findViewById<TextView>(R.id.signup_email_input)
+        emailInput.background = getDrawable(R.drawable.normal_input)
+        emailInput.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+
+        if (!isValidEmail(email)) {
+            emailInput.background = getDrawable(R.drawable.error_input)
+            emailInput.setCompoundDrawablesWithIntrinsicBounds(null, null, getDrawable(R.drawable.warning), null)
+
+            Toast.makeText(
+                this@SignUpActivity,
+                getString(R.string.error_email_invalid),
+                Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val password_input =findViewById<TextView>(R.id.signup_password_input)
+        password_input.background = getDrawable(R.drawable.normal_input)
+        password_input.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+
+        if (password.isBlank()) {
+            password_input.background = getDrawable(R.drawable.error_input)
+            password_input.setCompoundDrawablesWithIntrinsicBounds(null, null, getDrawable(R.drawable.warning), null)
+
+            Toast.makeText(
+                this@SignUpActivity,
+                getString(R.string.error_password_empty),
+                Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val password_verification =findViewById<TextView>(R.id.signup_cpassword_input)
+        password_verification.background = getDrawable(R.drawable.normal_input)
+        password_verification.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+
+        if (password != verificationPassword) {
+            password_verification.background = getDrawable(R.drawable.error_input)
+            password_verification.setCompoundDrawablesWithIntrinsicBounds(null, null, getDrawable(R.drawable.warning), null)
+
+            Toast.makeText(
+                this@SignUpActivity,
+                getString(R.string.error_password_verification),
                 Toast.LENGTH_SHORT).show()
             return
         }
@@ -66,6 +119,9 @@ class SignUpActivity : AppCompatActivity(), CoroutineScope {
             )
 
             if (data.has("error")) {
+                emailInput.background = getDrawable(R.drawable.error_input)
+                emailInput.setCompoundDrawablesWithIntrinsicBounds(null, null, getDrawable(R.drawable.warning), null)
+
                 Toast.makeText(
                 this@SignUpActivity,
                 getString(R.string.error_sign_up),
@@ -87,5 +143,19 @@ class SignUpActivity : AppCompatActivity(), CoroutineScope {
                 finish()
             }
         }
+    }
+
+    fun isValidEmail(email: String): Boolean {
+        val pattern = Pattern.compile(
+            "[a-zA-Z0-9+._%-+]{1,256}" +
+                    "@" +
+                    "[a-zA-Z0-9][a-zA-Z0-9-]{0,64}" +
+                    "(" +
+                    "." +
+                    "[a-zA-Z0-9][a-zA-Z0-9-]{0,25}" +
+                    ")+"
+        )
+        val matcher = pattern.matcher(email)
+        return matcher.matches()
     }
 }
